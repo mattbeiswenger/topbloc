@@ -28,10 +28,10 @@ public class TopBloc {
         JSONArray wordSetOneResults = new JSONArray();
 
         // assume that all have same # of rows
-        for (int i = 0; i < d1.numberSetOne.length; i++) {
-            numberSetOneResults.put(d1.numberSetOne[i] * d2.numberSetOne[i]);
-            numberSetTwoResults.put(d1.numberSetTwo[i] / d2.numberSetTwo[i]);
-            wordSetOneResults.put(d1.wordSetOne[i] + ' ' + d2.wordSetOne[i]);
+        for (int i = 0; i < d1.getNumberSetOne().size(); i++) {
+            numberSetOneResults.put(d1.getNumberSetOne(i) * d2.getNumberSetOne(i));
+            numberSetTwoResults.put(d1.getNumberSetTwo(i) / d2.getNumberSetTwo(i));
+            wordSetOneResults.put(d1.getWordSetOne(i) + ' ' + d2.getWordSetOne(i));
         }
         
         JSONObject json = new JSONObject();
@@ -39,6 +39,8 @@ public class TopBloc {
         json.put("numberSetOne", numberSetOneResults);
         json.put("numberSetTwo", numberSetTwoResults);
         json.put("wordSetOne", wordSetOneResults);
+        
+        System.out.println(json);
         
             Unirest.post("http://34.239.125.159:5000/challenge")
                 .header("Content-Type", "application/json")
@@ -55,17 +57,15 @@ public class TopBloc {
         Iterator<Row> rowIterator = spreadsheet.iterator();
 
         Data d = new Data();
-        int x = 0; // counter for array indices
         rowIterator.next(); // skip title row
 
         while (rowIterator.hasNext()) {
             XSSFRow row = (XSSFRow) rowIterator.next();
             Iterator<Cell> cellIterator = row.cellIterator();
             while (cellIterator.hasNext()) {
-                d.numberSetOne[x] = (int) cellIterator.next().getNumericCellValue();
-                d.numberSetTwo[x] = (int) cellIterator.next().getNumericCellValue();
-                d.wordSetOne[x] = cellIterator.next().toString();
-                x++;
+                d.setNumberSetOne((int) cellIterator.next().getNumericCellValue());
+                d.setNumberSetTwo((int) cellIterator.next().getNumericCellValue());
+                d.setWordSetOne(cellIterator.next().toString());
             }
 
         }
