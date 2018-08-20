@@ -40,8 +40,6 @@ public class TopBloc {
         json.put("numberSetTwo", numberSetTwoResults);
         json.put("wordSetOne", wordSetOneResults);
         
-        System.out.println(json);
-        
             Unirest.post("http://34.239.125.159:5000/challenge")
                 .header("Content-Type", "application/json")
                 .body(json)

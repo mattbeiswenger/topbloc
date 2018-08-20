@@ -23,6 +23,14 @@ public class Data {
         return this.numberSetOne;
     }
     
+    public ArrayList getNumberSetTwo() {
+        return this.numberSetTwo;
+    }
+    
+    public ArrayList getWordSetOne() {
+        return this.wordSetOne;
+    }
+    
     public int getNumberSetOne(int index) {
         return (int) this.numberSetOne.get(index);
     }
@@ -33,14 +41,6 @@ public class Data {
     
     public String getWordSetOne(int index) {
         return (String) this.wordSetOne.get(index);
-    }
-    
-    public ArrayList getNumberSetTwo() {
-        return this.numberSetTwo;
-    }
-    
-    public ArrayList getWordSetOne() {
-        return this.wordSetOne;
     }
     
 }
